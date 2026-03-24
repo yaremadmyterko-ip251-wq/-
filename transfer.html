@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Перекази • BankFlow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+min-height: 100vh;
+}
+
+.navbar {
+background: rgba(15, 23, 42, 0.95);
+backdrop-filter: blur(10px);
+padding: 20px 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.logo-icon {
+width: 40px;
+height: 40px;
+background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.logo-icon i {
+font-size: 20px;
+color: white;
+}
+
+.logo span {
+font-size: 20px;
+font-weight: 700;
+color: white;
+}
+
+.nav-links {
+display: flex;
+gap: 24px;
+}
+
+.nav-links a {
+color: #94a3b8;
+text-decoration: none;
+transition: color 0.3s;
+font-weight: 500;
+}
+
+.nav-links a:hover, .nav-links a.active {
+color: #3b82f6;
+}
+
+.user-info {
+display: flex;
+align-items: center;
+gap: 16px;
+}
+
+.balance {
+background: rgba(59,130,246,0.2);
+padding: 8px 16px;
+border-radius: 12px;
+color: #3b82f6;
+font-weight: 600;
+}
+
+.logout-btn {
+background: rgba(239,68,68,0.2);
+color: #ef4444;
+border: none;
+padding: 8px 16px;
+border-radius: 12px;
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.logout-btn:hover {
+background: rgba(239,68,68,0.3);
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px;
+}
+
+.page-title {
+font-size: 32px;
+font-weight: 700;
+color: white;
+margin-bottom: 32px;
+}
+
+.transfer-section {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 32px;
+margin-bottom: 48px;
+}
+
+.card {
+background: rgba(255,255,255,0.03);
+backdrop-filter: blur(10px);
+border-radius: 24px;
+border: 1px solid rgba(255,255,255,0.1);
+padding: 32px;
+}
+
+.card h3 {
+color: white;
+font-size: 20px;
+margin-bottom: 24px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+label {
+display: block;
+color: #94a3b8;
+margin-bottom: 8px;
+font-size: 14px;
+}
+
+input, select {
+width: 100%;
+padding: 12px 16px;
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+color: white;
+font-size: 16px;
+font-family: 'Inter', sans-serif;
+}
+
+input:focus, select:focus {
+outline: none;
+border-color: #3b82f6;
+}
+
+button {
+width: 100%;
+padding: 14px;
+background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+color: white;
+border: none;
+border-radius: 12px;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: transform 0.3s;
+}
+
+button:hover {
+transform: translateY(-2px);
+}
+
+.contacts-list {
+max-height: 400px;
+overflow-y: auto;
+}
+
+.contact-item {
+padding: 12px;
+margin-bottom: 8px;
+background: rgba(255,255,255,0.05);
+border-radius: 12px;
+cursor: pointer;
+transition: all 0.3s;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.contact-item:hover {
+background: rgba(59,130,246,0.2);
+transform: translateX(4px);
+}
+
+.contact-info {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.contact-avatar {
+width: 40px;
+height: 40px;
+background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.contact-name {
+color: white;
+font-weight: 500;
+}
+
+.contact-username {
+color: #64748b;
+font-size: 12px;
+}
+
+.transactions-list {
+max-height: 500px;
+overflow-y: auto;
+}
+
+.transaction-item {
+padding: 16px;
+margin-bottom: 12px;
+background: rgba(255,255,255,0.05);
+border-radius: 16px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.transaction-info {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.transaction-icon {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+}
+
+.transaction-icon.sent {
+background: rgba(239,68,68,0.2);
+color: #ef4444;
+}
+
+.transaction-icon.received {
+background: rgba(34,197,94,0.2);
+color: #22c55e;
+}
+
+.transaction-details h4 {
+color: white;
+margin-bottom: 4px;
+}
+
+.transaction-details p {
+color: #64748b;
+font-size: 12px;
+}
+
+.transaction-amount {
+text-align: right;
+}
+
+.amount {
+font-size: 18px;
+font-weight: 600;
+}
+
+.amount.sent {
+color: #ef4444;
+}
+
+.amount.received {
+color: #22c55e;
+}
+
+.message {
+margin-top: 16px;
+padding: 12px;
+border-radius: 12px;
+display: none;
+}
+
+.message.success {
+background: rgba(34,197,94,0.2);
+color: #22c55e;
+display: block;
+}
+
+.message.error {
+background: rgba(239,68,68,0.2);
+color: #ef4444;
+display: block;
+}
+
+@media (max-width: 768px) {
+.transfer-section {
+grid-template-columns: 1fr;
+}
+
+.navbar {
+padding: 16px 20px;
+flex-direction: column;
+gap: 12px;
+}
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+<div class="logo">
+<div class="logo-icon">
+<i class="fas fa-bolt"></i>
+</div>
+<span>BankFlow</span>
+</div>
+<div class="nav-links">
+<a href="index.html">Головна</a>
+<a href="transfers.html" class="active">Перекази</a>
+</div>
+<div class="user-info">
+<div class="balance" id="balanceDisplay">0 UAH</div>
+<button class="logout-btn" onclick="logout()">
+<i class="fas fa-sign-out-alt"></i>
+</button>
+</div>
+</div>
+
+<div class="container">
+<h1 class="page-title">Грошові перекази</h1>
+
+<div class="transfer-section">
+<!-- Форма переказу -->
+<div class="card">
+<h3>
+<i class="fas fa-paper-plane"></i>
+Новий переказ
+</h3>
+<form id="transferForm">
+<div class="form-group">
+<label>Отримувач</label>
+<input type="text" id="recipient" placeholder="Ім'я користувача" required>
+</div>
+<div class="form-group">
+<label>Сума</label>
+<input type="number" id="amount" step="0.01" placeholder="0.00" required>
+</div>
+<div class="form-group">
+<label>Валюта</label>
+<select id="currency">
+<option value="UAH">UAH - Гривня</option>
+<option value="USD">USD - Долар США</option>
+<option value="EUR">EUR - Євро</option>
+</select>
+</div>
+<div class="form-group">
+<label>Опис (необов'язково)</label>
+<input type="text" id="description" placeholder="Призначення платежу">
+</div>
+<button type="submit">
+<i class="fas fa-arrow-right"></i> Виконати переказ
+</button>
+</form>
+<div id="transferMessage" class="message"></div>
+</div>
+
+<!-- Контакти -->
+<div class="card">
+<h3>
+<i class="fas fa-address-book"></i>
+Швидкі контакти
+</h3>
+<div id="contactsList" class="contacts-list">
+<div style="text-align: center; color: #64748b; padding: 40px;">
+Завантаження...
+</div>
+</div>
+</div>
+</div>
+
+<!-- Історія транзакцій -->
+<div class="card" style="margin-top: 32px;">
+<h3>
+<i class="fas fa-history"></i>
+Історія операцій
+</h3>
+<div id="transactionsList" class="transactions-list">
+<div style="text-align: center; color: #64748b; padding: 40px;">
+Завантаження...
+</div>
+</div>
+</div>
+</div>
+
+<script>
+let currentUser = null;
+let userBalance = {};
+
+window.onload = function() {
+const userData = localStorage.getItem('user');
+if (!userData) {
+window.location.href = 'login.html';
+return;
+}
+
+currentUser = JSON.parse(userData);
+loadBalance();
+loadContacts();
+loadTransactions();
+};
+
+async function loadBalance() {
+try {
+const response = await fetch(`http://localhost:3000/api/balance/${currentUser.username}`);
+const data = await response.json();
+if (data.success) {
+userBalance = data.balance;
+updateBalanceDisplay();
+}
+} catch (error) {
+console.error('Помилка завантаження балансу:', error);
+}
+}
+
+function updateBalanceDisplay() {
+const balances = [];
+if (userBalance.UAH) balances.push(`${userBalance.UAH.toFixed(2)} UAH`);
+if (userBalance.USD) balances.push(`${userBalance.USD.toFixed(2)} USD`);
+if (userBalance.EUR) balances.push(`${userBalance.EUR.toFixed(2)} EUR`);
+document.getElementById('balanceDisplay').textContent = balances.join(' | ') || '0 UAH';
+}
+
+async function loadContacts() {
+try {
+const response = await fetch(`http://localhost:3000/api/contacts/${currentUser.username}`);
+const data = await response.json();
+
+const contactsDiv = document.getElementById('contactsList');
+if (data.contacts.length === 0) {
+contactsDiv.innerHTML = '<div style="text-align: center; color: #64748b; padding: 40px;">Немає збережених контактів</div>';
+return;
+}
+
+contactsDiv.innerHTML = data.contacts.map(contact => `
+<div class="contact-item" onclick="fillRecipient('${contact.username}')">
+<div class="contact-info">
+<div class="contact-avatar">
+<i class="fas fa-user"></i>
+</div>
+<div>
+<div class="contact-name">${contact.name}</div>
+<div class="contact-username">@${contact.username}</div>
+</div>
+</div>
+<i class="fas fa-chevron-right" style="color: #64748b;"></i>
+</div>
+`).join('');
+} catch (error) {
+console.error('Помилка завантаження контактів:', error);
+}
+}
+
+async function loadTransactions() {
+try {
+const response = await fetch(`http://localhost:3000/api/transactions/${currentUser.username}`);
+const data = await response.json();
+
+const transactionsDiv = document.getElementById('transactionsList');
+if (data.transactions.length === 0) {
+transactionsDiv.innerHTML = '<div style="text-align: center; color: #64748b; padding: 40px;">Немає транзакцій</div>';
+return;
+}
+
+transactionsDiv.innerHTML = data.transactions.map(t => {
+const isSent = t.from === currentUser.username;
+const icon = isSent ? 'fa-arrow-up' : 'fa-arrow-down';
+const iconClass = isSent ? 'sent' : 'received';
+const amountClass = isSent ? 'sent' : 'received';
+const sign = isSent ? '-' : '+';
+const counterparty = isSent ? t.to : t.from;
+const date = new Date(t.createdAt).toLocaleString

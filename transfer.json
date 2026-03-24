@@ -1,0 +1,155 @@
+{
+"transfers": [
+{
+"id": "TRF001",
+"from": "john_doe",
+"to": "jane_smith",
+"amount": 1250.50,
+"currency": "UAH",
+"status": "completed",
+"type": "instant",
+"description": "Оплата за послуги",
+"createdAt": "2026-01-15T10:30:00.000Z",
+"completedAt": "2026-01-15T10:30:05.000Z"
+},
+{
+"id": "TRF002",
+"from": "alex_k",
+"to": "john_doe",
+"amount": 500.00,
+"currency": "USD",
+"status": "pending",
+"type": "scheduled",
+"description": "Щомісячний платіж",
+"scheduledDate": "2026-01-20T09:00:00.000Z",
+"createdAt": "2026-01-15T11:20:00.000Z"
+},
+{
+"id": "TRF003",
+"from": "john_doe",
+"to": "mary_j",
+"amount": 3200.00,
+"currency": "UAH",
+"status": "failed",
+"type": "instant",
+"description": "Переказ на картку",
+"error": "Недостатньо коштів",
+"createdAt": "2026-01-14T15:45:00.000Z",
+"failedAt": "2026-01-14T15:45:03.000Z"
+}
+],
+"balances": {
+"john_doe": {
+"UAH": 15750.80,
+"USD": 1250.00,
+"EUR": 800.50
+},
+"jane_smith": {
+"UAH": 8900.25,
+"USD": 2100.00
+},
+"alex_k": {
+"UAH": 23400.00,
+"USD": 500.00
+},
+"mary_j": {
+"UAH": 12500.00
+}
+},
+"contacts": {
+"john_doe": [
+{
+"name": "Jane Smith",
+"username": "jane_smith",
+"phone": "+380501234567",
+"favorite": true,
+"lastTransfer": "2026-01-15T10:30:00.000Z"
+},
+{
+"name": "Alex K",
+"username": "alex_k",
+"phone": "+380671234567",
+"favorite": true,
+"lastTransfer": "2026-01-10T14:20:00.000Z"
+}
+],
+"jane_smith": [
+{
+"name": "John Doe",
+"username": "john_doe",
+"phone": "+380931234567",
+"favorite": true,
+"lastTransfer": "2026-01-15T10:30:00.000Z"
+}
+]
+},
+"scheduledTransfers": [
+{
+"id": "SCH001",
+"from": "john_doe",
+"to": "jane_smith",
+"amount": 1000.00,
+"currency": "UAH",
+"frequency": "monthly",
+"dayOfMonth": 15,
+"description": "Оренда",
+"nextExecution": "2026-02-15T09:00:00.000Z",
+"status": "active",
+"createdAt": "2026-01-01T12:00:00.000Z"
+},
+{
+"id": "SCH002",
+"from": "alex_k",
+"to": "john_doe",
+"amount": 50.00,
+"currency": "USD",
+"frequency": "weekly",
+"dayOfWeek": "monday",
+"description": "Підписка",
+"nextExecution": "2024-01-22T09:00:00.000Z",
+"status": "active",
+"createdAt": "2026-01-05T10:30:00.000Z"
+}
+],
+"cards": {
+"john_doe": [
+{
+"cardId": "CARD001",
+"cardNumber": "**** **** **** 8888",
+"cardType": "visa",
+"expiryDate": "12/28",
+"cvv": "***",
+"balance": 15750.80,
+"currency": "UAH",
+"status": "active",
+"isMain": true
+},
+{
+"cardId": "CARD002",
+"cardNumber": "**** **** **** 1234",
+"cardType": "mastercard",
+"expiryDate": "08/26",
+"cvv": "***",
+"balance": 1250.00,
+"currency": "USD",
+"status": "active",
+"isMain": false
+}
+]
+},
+"exchangeRates": {
+"USD": {
+"UAH": 38.50,
+"EUR": 0.92
+},
+"EUR": {
+"UAH": 41.80,
+"USD": 1.09
+},
+"UAH": {
+"USD": 0.026,
+"EUR": 0.024
+},
+"lastUpdate": "2026-01-15T12:00:00.000Z"
+}
+}

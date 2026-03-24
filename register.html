@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Реєстрація • BankFlow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+min-height: 100vh;
+overflow-x: hidden;
+position: relative;
+}
+
+.bg-animation {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 0;
+overflow: hidden;
+}
+
+.circle {
+position: absolute;
+background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.05) 100%);
+border-radius: 50%;
+animation: float 20s infinite ease-in-out;
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0px) rotate(0deg); }
+50% { transform: translateY(-40px) rotate(180deg); }
+}
+
+.container {
+position: relative;
+z-index: 1;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+
+.card {
+background: rgba(255, 255, 255, 0.03);
+backdrop-filter: blur(20px);
+border-radius: 48px;
+border: 1px solid rgba(255, 255, 255, 0.1);
+padding: 48px;
+width: 100%;
+max-width: 480px;
+box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+transition: transform 0.3s ease;
+}
+
+.card:hover {
+transform: translateY(-5px);
+}
+
+.back-link {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+color: #94a3b8;
+text-decoration: none;
+margin-bottom: 32px;
+font-size: 14px;
+transition: color 0.3s;
+}
+
+.back-link:hover {
+color: white;
+}
+
+.logo {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.logo-icon {
+width: 60px;
+height: 60px;
+background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+border-radius: 20px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 16px;
+}
+
+.logo-icon i {
+font-size: 28px;
+color: white;
+}
+
+.logo h2 {
+font-size: 24px;
+font-weight: 700;
+color: white;
+margin-bottom: 8px;
+}
+
+.logo p {
+color: #94a3b8;
+font-size: 14px;
+}
+
+.form-group {
+margin-bottom: 24px;
+}
+
+label {
+display: block;
+margin-bottom: 8px;
+color: #e2e8f0;
+font-size: 14px;
+font-weight: 500;
+}
+
+.input-group {
+position: relative;
+}
+
+.input-group i {
+position: absolute;
+left: 16px;
+top: 50%;
+transform: translateY(-50%);
+color: #64748b;
+font-size: 18px;
+}
+
+input {
+width: 100%;
+padding: 16px 16px 16px 48px;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+font-size: 16px;
+color: white;
+font-family: 'Inter', sans-serif;
+transition: all 0.3s ease;
+}
+
+input:focus {
+outline: none;
+border-color: #3b82f6;
+background: rgba(255, 255, 255, 0.08);
+}
+
+input::placeholder {
+color: #64748b;
+}
+
+.password-strength {
+margin-top: 8px;
+height: 4px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 2px;
+overflow: hidden;
+}
+
+.strength-bar {
+height: 100%;
+width: 0%;
+transition: all 0.3s ease;
+border-radius: 2px;
+}
+
+.strength-text {
+font-size: 12px;
+margin-top: 6px;
+color: #94a3b8;
+}
+
+button {
+width: 100%;
+padding: 16px;
+background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+color: white;
+border: none;
+border-radius: 16px;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+font-family: 'Inter', sans-serif;
+margin-top: 8px;
+}
+
+button:hover:not(:disabled) {
+transform: translateY(-2px);
+box-shadow: 0 10px 25px rgba(59,130,246,0.3);
+}
+
+button:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+.login-link {
+text-align: center;
+margin-top: 24px;
+color: #94a3b8;
+font-size: 14px;
+}
+
+.login-link a {
+color: #3b82f6;
+text-decoration: none;
+font-weight: 600;
+}
+
+.login-link a:hover {
+text-decoration: underline;
+}
+
+.message {
+margin-top: 20px;
+padding: 14px;
+border-radius: 16px;
+display: none;
+animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+from {
+opacity: 0;
+transform: translateY(-10px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.message.success {
+background: rgba(34, 197, 94, 0.2);
+color: #4ade80;
+border: 1px solid rgba(34, 197, 94, 0.3);
+display: block;
+}
+
+.message.error {
+background: rgba(239, 68, 68, 0.2);
+color: #f87171;
+border: 1px solid rgba(239, 68, 68, 0.3);
+display: block;
+}
+
+@media (max-width: 640px) {
+.card {
+padding: 32px 24px;
+}
+}
+</style>
+</head>
+<body>
+<div class="bg-animation"></div>
+<div class="container">
+<div class="card">
+<a href="index.html" class="back-link">
+<i class="fas fa-arrow-left"></i>
+На головну
+</a>
+
+<div class="logo">
+<div class="logo-icon">
+<i class="fas fa-user-plus"></i>
+</div>
+<h2>Створення акаунту</h2>
+<p>Приєднуйтесь до цифрового банкінгу майбутнього</p>
+</div>
+
+<form id="registerForm">
+<div class="form-group">
+<label>Ім'я користувача</label>
+<div class="input-group">
+<i class="fas fa-user"></i>
+<input type="text" id="username" placeholder="example_user" required autocomplete="off">
+</div>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<div class="input-group">
+<i class="fas fa-envelope"></i>
+<input type="email" id="email" placeholder="hello@bankflow.com" required autocomplete="off">
+</div>
+</div>
+
+<div class="form-group">
+<label>Пароль</label>
+<div class="input-group">
+<i class="fas fa-lock"></i>
+<input type="password" id="password" placeholder="Мінімум 6 символів" required minlength="6">
+</div>
+<div class="password-strength">
+<div class="strength-bar" id="strengthBar"></div>
+</div>
+<div class="strength-text" id="strengthText"></div>
+</div>
+
+<button type="submit" id="submitBtn">
+<i class="fas fa-arrow-right"></i>
+Створити акаунт
+</button>
+</form>
+
+<div class="login-link">
+Вже маєте акаунт? <a href="login.html">Увійти</a>
+</div>
+
+<div id="message" class="message"></div>
+</div>
+</div>
+
+<script>
+// Фонові кола
+for (let i = 0; i < 15; i++) {
+const circle = document.createElement('div');
+circle.className = 'circle';
+const size = Math.random() * 400 + 100;
+circle.style.width = `${size}px`;
+circle.style.height = `${size}px`;
+circle.style.left = `${Math.random() * 100}%`;
+circle.style.top = `${Math.random() * 100}%`;
+circle.style.animationDelay = `${Math.random() * 20}s`;
+circle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+document.querySelector('.bg-animation').appendChild(circle);
+}
+
+// Перевірка сили пароля
+const passwordInput = document.getElementById('password');
+const strengthBar = document.getElementById('strengthBar');
+const strengthText = document.getElementById('strengthText');
+
+passwordInput.addEventListener('input', function() {
+const password = this.value;
+let strength = 0;
+
+if (password.length >= 6) strength++;
+if (password.length >= 10) strength++;
+if (/[A-Z]/.test(password)) strength++;
+if (/[0-9]/.test(password)) strength++;
+if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+const percentage = (strength / 5) * 100;
+strengthBar.style.width = `${percentage}%`;
+
+if (percentage <= 20) {
+strengthBar.style.background = '#ef4444';
+strengthText.textContent = 'Дуже слабкий';
+strengthText.style.color = '#ef4444';
+} else if (percentage <= 40) {
+strengthBar.style.background = '#f59e0b';
+strengthText.textContent = 'Слабкий';
+strengthText.style.color = '#f59e0b';
+} else if (percentage <= 60) {
+strengthBar.style.background = '#eab308';
+strengthText.textContent = 'Середній';
+strengthText.style.color = '#eab308';
+} else if (percentage <= 80) {
+strengthBar.style.background = '#84cc16';
+strengthText.textContent = 'Добрий';
+strengthText.style.color = '#84cc16';
+} else {
+strengthBar.style.background = '#10b981';
+strengthText.textContent = 'Відмінний!';
+strengthText.style.color = '#10b981';
+}
+
+if (password.length === 0) {
+strengthText.textContent = '';
+strengthBar.style.width = '0%';
+}
+});
+
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+e.preventDefault();
+
+const submitBtn = document.getElementById('submitBtn');
+const username = document.getElementById('username').value.trim();
+const email = document.getElementById('email').value.trim();
+const password = document.getElementById('password').value;
+
+// Валідація
+if (!username || !email || !password) {
+showMessage('Будь ласка, заповніть всі поля', 'error');
+return;
+}
+
+if (username.length < 3) {
+showMessage('Ім\'я користувача повинно містити мінімум 3 символи', 'error');
+return;
+}
+
+if (!email.includes('@') || !email.includes('.')) {
+showMessage('Введіть коректний email', 'error');
+return;
+}
+
+if (password.length < 6) {
+showMessage('Пароль повинен містити мінімум 6 символів', 'error');
+return;
+}
+
+// Блокуємо кнопку
+submitBtn.disabled = true;
+submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Реєстрація...';
+
+try {
+console.log('Надсилаємо запит на реєстрацію...');
+
+const response = await fetch('http://localhost:3000/api/register', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+},
+body: JSON.stringify({ username, email, password })
+});
+
+const data = await response.json();
+console.log('Відповідь сервера:', data);
+
+if (data.success) {
+showMessage(data.message, 'success');
+setTimeout(() => {
+window.location.href = 'login.html';
+}, 2000);
+} else {
+showMessage(data.message, 'error');
+submitBtn.disabled = false;
+submitBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Створити акаунт';
+}
+} catch (error) {
+console.error('Помилка:', error);
+showMessage('Помилка підключення до сервера. Переконайтесь, що сервер запущено на http://localhost:3000', 'error');
+submitBtn.disabled = false;
+submitBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Створити акаунт';
+}
+});
+
+function showMessage(text, type) {
+const messageDiv = document.getElementById('message');
+messageDiv.textContent = text;
+messageDiv.className = `message ${type}`;
+setTimeout(() => {
+messageDiv.style.display = 'none';
+messageDiv.className = 'message';
+}, 5000);
+}
+</script>
+</body>
+</html>
