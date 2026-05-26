@@ -1,0 +1,233 @@
+/* ===== БАЗОВІ СТИЛІ ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2235;
+  --surface3: #222d42;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.15);
+  --accent: #3b82f6;
+  --accent2: #60a5fa;
+  --accent-dim: rgba(59,130,246,0.15);
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.12);
+  --yellow: #f59e0b;
+  --purple: #8b5cf6;
+  --text: #f1f5f9;
+  --text-muted: #64748b;
+  --text-sub: #94a3b8;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 8px 40px rgba(0,0,0,0.5);
+  --shadow-accent: 0 4px 24px rgba(59,130,246,0.3);
+  --sidebar-w: 240px;
+  --font-display: 'Unbounded', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --transition: 0.2s ease;
+}
+
+html, body { height: 100%; font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; font-size: 15px; }
+
+/* ===== ЗАГРУЗОЧНИЙ ЕКРАН ===== */
+#loading-screen {
+  position: fixed; inset: 0; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  z-index: 9999; transition: opacity 0.5s;
+}
+#loading-screen.fade-out { opacity: 0; pointer-events: none; }
+.loader-logo { display: flex; align-items: center; gap: 12px; }
+.loader-logo .logo-icon { font-size: 2.5rem; }
+.loader-logo .logo-text { font-size: 1.8rem; }
+.loader-bar { width: 200px; height: 3px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+.loader-progress { height: 100%; background: linear-gradient(90deg, var(--accent), var(--purple)); border-radius: 2px; animation: loadProgress 1.2s ease forwards; }
+@keyframes loadProgress { from { width: 0; } to { width: 100%; } }
+
+/* ===== ЕКРАНИ ===== */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; }
+
+/* ===== КНОПКИ ===== */
+.btn-primary {
+  width: 100%; padding: 13px 24px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; transition: all var(--transition); margin-top: 8px;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: var(--shadow-accent); }
+.btn-primary:active { transform: translateY(0); box-shadow: none; }
+
+.btn-secondary {
+  padding: 9px 18px; background: transparent;
+  color: var(--accent); border: 1.5px solid var(--accent);
+  border-radius: var(--radius-sm); font-family: var(--font-body);
+  font-size: 0.87rem; font-weight: 600; cursor: pointer; transition: all var(--transition);
+}
+.btn-secondary:hover { background: var(--accent); color: #fff; }
+
+.btn-danger {
+  padding: 11px 22px; background: transparent; color: var(--red);
+  border: 1.5px solid var(--red); border-radius: var(--radius-sm);
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all var(--transition);
+}
+.btn-danger:hover { background: var(--red); color: #fff; }
+
+.icon-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text-sub); font-size: 1rem; cursor: pointer;
+  transition: all var(--transition); display: flex; align-items: center; justify-content: center;
+}
+.icon-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.link-btn {
+  background: none; border: none; color: var(--accent);
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  padding: 8px 0; display: block; margin-top: 8px;
+  transition: opacity var(--transition);
+}
+.link-btn:hover { opacity: 0.7; }
+
+/* ===== ІНПУТИ ===== */
+.input-group { margin-bottom: 14px; }
+.input-group label {
+  display: block; font-size: 0.78rem; font-weight: 600;
+  color: var(--text-sub); margin-bottom: 6px;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.input-wrap { position: relative; display: flex; align-items: center; }
+.input-icon {
+  position: absolute; left: 12px; font-size: 0.9rem;
+  pointer-events: none; z-index: 1;
+}
+.input-wrap input, .input-wrap select { padding-left: 36px !important; }
+
+.input-group input,
+.input-group select,
+.input-wrap input,
+.input-wrap select {
+  width: 100%; padding: 11px 14px;
+  background: var(--surface2); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text);
+  font-family: var(--font-body); font-size: 0.92rem; outline: none;
+  transition: border var(--transition), box-shadow var(--transition);
+  appearance: none; -webkit-appearance: none;
+}
+.input-group input:focus,
+.input-group select:focus,
+.input-wrap input:focus,
+.input-wrap select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+  background: var(--surface3);
+}
+.input-group select option, .input-wrap select option { background: var(--surface2); }
+
+.eye-btn {
+  position: absolute; right: 10px; background: none; border: none;
+  color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 4px;
+}
+
+/* Швидкі суми */
+.quick-amounts {
+  display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap;
+}
+.quick-amounts button {
+  padding: 6px 12px; background: var(--surface2);
+  border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text-sub); font-size: 0.8rem; cursor: pointer;
+  font-family: var(--font-body); transition: all var(--transition);
+}
+.quick-amounts button:hover { background: var(--accent-dim); border-color: var(--accent); color: var(--accent2); }
+
+/* ===== ПІДКАЗКИ ===== */
+.field-hint { font-size: 0.78rem; margin-top: 5px; min-height: 16px; }
+.field-hint.ok { color: var(--green); }
+.field-hint.err { color: var(--red); }
+.field-hint.loading { color: var(--text-muted); }
+
+.error-msg { color: var(--red); font-size: 0.83rem; min-height: 18px; margin-bottom: 4px; }
+.success-msg { color: var(--green); font-size: 0.83rem; min-height: 18px; margin-bottom: 4px; }
+
+/* Міцність пароля */
+.password-strength {
+  height: 4px; border-radius: 2px; margin-top: 6px;
+  background: var(--surface2); overflow: hidden; position: relative;
+}
+.password-strength::after {
+  content: ''; position: absolute; left: 0; top: 0; height: 100%;
+  border-radius: 2px; transition: width 0.3s, background 0.3s;
+  width: var(--strength, 0%); background: var(--strength-color, var(--red));
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--surface3); color: var(--text);
+  padding: 11px 28px; border-radius: 50px; font-size: 0.88rem; font-weight: 500;
+  border: 1px solid var(--border-hover); box-shadow: var(--shadow);
+  z-index: 9999; transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+  opacity: 0; pointer-events: none; white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast.success { border-color: rgba(34,197,94,0.4); }
+.toast.error { border-color: rgba(239,68,68,0.4); }
+
+/* ===== CUSTOM CONFIRM ===== */
+.confirm-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+  z-index: 10000; align-items: center; justify-content: center;
+}
+.confirm-overlay.open { display: flex; }
+.confirm-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 32px 28px; text-align: center;
+  max-width: 340px; width: 90%; box-shadow: var(--shadow);
+  animation: slideUp 0.25s ease;
+}
+.confirm-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.confirm-msg { font-size: 1rem; font-weight: 500; margin-bottom: 24px; line-height: 1.5; }
+.confirm-btns { display: flex; gap: 10px; justify-content: center; }
+.confirm-btns button { flex: 1; }
+
+/* ===== ЛОГОТИП ===== */
+.logo-icon {
+  font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), #818cf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.logo-text {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+  letter-spacing: -0.02em; color: var(--text);
+}
+
+/* ===== СЕКЦІЯ ===== */
+.section-title {
+  font-family: var(--font-display); font-size: 0.72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-muted); margin: 20px 0 10px;
+}
+
+/* ===== ФОРМА КАРТКА ===== */
+.form-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; max-width: 480px;
+}
+
+/* ===== СКРОЛБАР ===== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+@media (max-width: 768px) {
+  .form-card { max-width: 100%; }
+}
